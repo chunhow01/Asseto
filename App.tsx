@@ -4,7 +4,7 @@ import Dashboard from './components/Dashboard';
 import AssetList from './components/AssetList';
 import AddAssetForm from './components/AddAssetForm';
 import SettingsModal from './components/SettingsModal';
-import { LayoutDashboard, Settings } from 'lucide-react';
+import { Settings } from 'lucide-react';
 
 const App: React.FC = () => {
   const STORAGE_KEY = 'asseto_portfolio_v1';
@@ -64,9 +64,14 @@ const App: React.FC = () => {
         {/* Navigation / Header */}
         <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
             <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
-                        <LayoutDashboard size={20} className="text-white" />
+                <div className="flex items-center gap-3">
+                    {/* Updated Logo: Doughnut chart on white background */}
+                    <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm border border-blue-100">
+                        <img 
+                            src="https://img.icons8.com/ios-filled/50/2563eb/doughnut-chart.png" 
+                            alt="Asseto Logo" 
+                            className="w-5 h-5"
+                        />
                     </div>
                     <span className="font-bold text-xl tracking-tight text-gray-900">Asseto</span>
                 </div>
