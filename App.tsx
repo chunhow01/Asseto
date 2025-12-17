@@ -58,10 +58,10 @@ const App: React.FC = () => {
         <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
             <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    {/* Consistent Segmented Doughnut Logo */}
-                    <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm border border-gray-100 overflow-hidden p-1">
+                    {/* Consistent Minimalist Logo */}
+                    <div className="w-9 h-9 bg-white rounded-xl flex items-center justify-center shadow-sm border border-gray-100 overflow-hidden p-1.5">
                         <img 
-                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgZmlsbD0id2hpdGUiLz48Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjE4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjU2M2ViIiBzdHJva2Utd2lkdGg9IjYwIi8+PHBhdGggZD0iTTI1NiA3NiBBMTgwIDE4MCAwIDAgMSA0MzYgMjU2IiBmaWxsPSJub25lIiBzdHJva2U9IiMxMGI5ODEiIHN0cm9rZS13aWR0aD0iNjAiLz48L3N2Zz4=" 
+                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMTUwIiBzdHJva2U9IiMyNTYzZWIiIHN0cm9rZS13aWR0aD0iNTAiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMjU2IDEwNiBBMTUwIDE1MCAwIDAgMSA0MDYgMjU2IiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS13aWR0aD0iNTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==" 
                             alt="Asseto Logo" 
                             className="w-full h-full object-contain"
                         />
