@@ -1,13 +1,73 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Asset } from '../types';
-import { TrendingUp, Trash2 } from 'lucide-react';
+import { TrendingUp, Trash2, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 
 interface AssetListProps {
   assets: Asset[];
   onRemoveAsset: (id: string) => void;
 }
 
+type SortKey = 'symbol' | 'price' | 'shares' | 'value';
+
 const AssetList: React.FC<AssetListProps> = ({ assets, onRemoveAsset }) => {
+  const [sortConfig, setSortConfig] = useState<{ key: SortKey; direction: 'asc' | 'desc' } | null>(null);
+
+  const handleSort = (key: SortKey) => {
+    let direction: 'asc' | 'desc' = 'asc';
+    
+    if (sortConfig && sortConfig.key === key) {
+        // Toggle direction if clicking same column
+        direction = sortConfig.direction === 'asc' ? 'desc' : 'asc';
+    } else {
+        // Default sort directions: High numbers first (desc), A-Z for text (asc)
+        if (['price', 'shares', 'value'].includes(key)) {
+            direction = 'desc';
+        }
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedAssets = useMemo(() => {
+    if (!sortConfig) return assets;
+
+    return [...assets].sort((a, b) => {
+        let aValue: number | string;
+        let bValue: number | string;
+
+        // Calculate 'value' dynamically
+        if (sortConfig.key === 'value') {
+            aValue = a.shares * a.price;
+            bValue = b.shares * b.price;
+        } else {
+            aValue = a[sortConfig.key];
+            bValue = b[sortConfig.key];
+        }
+
+        if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+        if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+        return 0;
+    });
+  }, [assets, sortConfig]);
+
+  const SortIcon = ({ columnKey }: { columnKey: SortKey }) => {
+      if (sortConfig?.key !== columnKey) return <ArrowUpDown size={12} className="opacity-30 ml-1" />;
+      return sortConfig.direction === 'asc' 
+        ? <ArrowUp size={12} className="text-blue-600 ml-1" /> 
+        : <ArrowDown size={12} className="text-blue-600 ml-1" />;
+  };
+
+  const Th = ({ label, sortKey, align = 'left', className = '' }: { label: string, sortKey?: SortKey, align?: 'left' | 'right', className?: string }) => (
+      <th 
+        className={`py-2 ${align === 'right' ? 'text-right' : 'text-left'} ${className} ${sortKey ? 'cursor-pointer hover:text-gray-600 select-none group' : ''}`}
+        onClick={() => sortKey && handleSort(sortKey)}
+      >
+          <div className={`flex items-center ${align === 'right' ? 'justify-end' : 'justify-start'}`}>
+            {label}
+            {sortKey && <SortIcon columnKey={sortKey} />}
+          </div>
+      </th>
+  );
+
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col h-full w-full">
       <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-white/80 backdrop-blur-sm sticky top-0 z-10">
@@ -32,15 +92,15 @@ const AssetList: React.FC<AssetListProps> = ({ assets, onRemoveAsset }) => {
           <table className="w-full text-left border-collapse table-fixed">
             <thead>
               <tr className="text-[10px] sm:text-xs font-medium text-gray-400 border-b border-gray-100 uppercase tracking-wider">
-                <th className="py-2 pl-3 w-[28%] truncate">Asset</th>
-                <th className="py-2 text-right w-[22%] truncate">Price</th>
-                <th className="py-2 text-right w-[18%] truncate">Shares</th>
-                <th className="py-2 text-right pr-2 w-[25%] truncate">Value</th>
+                <Th label="Asset" sortKey="symbol" className="pl-3 w-[28%]" />
+                <Th label="Price" sortKey="price" align="right" className="w-[22%]" />
+                <Th label="Shares" sortKey="shares" align="right" className="w-[18%]" />
+                <Th label="Value" sortKey="value" align="right" className="pr-2 w-[25%]" />
                 <th className="py-2 w-[7%]"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
-              {assets.map((asset) => {
+              {sortedAssets.map((asset) => {
                 const totalValue = asset.shares * asset.price;
                 return (
                   <tr key={asset.id} className="group hover:bg-gray-50 transition-colors">

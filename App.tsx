@@ -6,7 +6,7 @@ import AddAssetForm from './components/AddAssetForm';
 import { LayoutDashboard } from 'lucide-react';
 
 const App: React.FC = () => {
-  const STORAGE_KEY = 'asset_pro_portfolio_v1';
+  const STORAGE_KEY = 'asseto_portfolio_v1';
 
   // Initialize state from Local Storage, or fall back to default data
   const [assets, setAssets] = useState<Asset[]>(() => {
@@ -55,7 +55,7 @@ const App: React.FC = () => {
                     <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
                         <LayoutDashboard size={20} className="text-white" />
                     </div>
-                    <span className="font-bold text-xl tracking-tight text-gray-900">AssetManager<span className="text-blue-600">.Pro</span></span>
+                    <span className="font-bold text-xl tracking-tight text-gray-900">Asseto</span>
                 </div>
                 <div className="hidden sm:flex items-center gap-4 text-sm font-medium text-gray-500">
                     <span className="hover:text-gray-900 cursor-pointer transition-colors">Dashboard</span>
