@@ -10,18 +10,13 @@ const App: React.FC = () => {
   const STORAGE_KEY = 'asseto_portfolio_v1';
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
-  // Initialize state from Local Storage, or fall back to default data
   const [assets, setAssets] = useState<Asset[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        return JSON.parse(saved);
-      }
+      if (saved) return JSON.parse(saved);
     } catch (e) {
       console.error("Failed to load from local storage", e);
     }
-    
-    // Default data for first-time users
     return [
       { id: '1', symbol: 'VOO', shares: 15.5, price: 436.50 },
       { id: '2', symbol: 'BTC', shares: 0.25, price: 64230.15 },
@@ -29,7 +24,6 @@ const App: React.FC = () => {
     ];
   });
 
-  // Save to Local Storage whenever 'assets' changes
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(assets));
   }, [assets]);
@@ -61,16 +55,15 @@ const App: React.FC = () => {
             onImport={handleImportAssets}
         />
 
-        {/* Navigation / Header */}
         <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
             <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    {/* Updated Logo: Doughnut chart on white background */}
-                    <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm border border-blue-100">
+                    {/* Consistent Segmented Doughnut Logo */}
+                    <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm border border-gray-100 overflow-hidden p-1">
                         <img 
-                            src="https://img.icons8.com/ios-filled/50/2563eb/doughnut-chart.png" 
+                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgZmlsbD0iI2ZmZmZmZiIvPjxwYXRoIGQ9Ik0yNTYsNzYgQTE4MCwxODAgMCAwLDEgNDExLjg4LDE2NS44OCBMMzMzLjk0LDIxMC45NCBBOTAsOTAgMCAwLDAgMjU2LDE2NiBaIiBmaWxsPSIjMjU2M2ViIi8+PHBhdGggZD0iTTQxMS44OCwxNjUuODggQTE4MCwxODAgMCAxLDEgNzYsMjU2IEwxNjYsMjU2IEE5MCw5MCAwIDEsMCAzMzMuOTQsMjEwLjk0IFoiIGZpbGw9IiMxMGI5ODEiLz48cGF0aCBkPSJNNzYsMjU2IEExODAsMTgwIDAgMCwxIDI1Niw3NiBMMjU2LDE2NiBBOTAsOTAgMCAwLDAgMTY2LDI1NiBaIiBmaWxsPSIjNjM2NmYxIi8+PC9zdmc+" 
                             alt="Asseto Logo" 
-                            className="w-5 h-5"
+                            className="w-full h-full object-contain"
                         />
                     </div>
                     <span className="font-bold text-xl tracking-tight text-gray-900">Asseto</span>
@@ -83,9 +76,10 @@ const App: React.FC = () => {
                     >
                         Settings
                     </button>
-                    <div className="w-8 h-8 rounded-full bg-gray-100 border border-gray-200 ml-2"></div>
+                    <div className="w-8 h-8 rounded-full bg-gray-100 border border-gray-200 ml-2 overflow-hidden flex items-center justify-center text-[10px] text-gray-400">
+                      User
+                    </div>
                 </div>
-                {/* Mobile Settings Icon */}
                 <button 
                     onClick={() => setIsSettingsOpen(true)}
                     className="sm:hidden p-2 text-gray-500 hover:bg-gray-100 rounded-lg"
@@ -96,19 +90,12 @@ const App: React.FC = () => {
         </nav>
 
         <main className="max-w-6xl mx-auto px-4 py-8">
-            {/* Removed fixed height calculation for mobile to allow natural scrolling */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[calc(100vh-140px)]">
-                
-                {/* Left Column: Chart & Form */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <div className="lg:col-span-5 flex flex-col gap-6">
                     <Dashboard assets={assets} />
-                    <div className="flex-1">
-                        <AddAssetForm onAddAsset={handleAddAsset} />
-                    </div>
+                    <AddAssetForm onAddAsset={handleAddAsset} />
                 </div>
-
-                {/* Right Column: Asset Table */}
-                <div className="lg:col-span-7 h-[500px] lg:h-auto">
+                <div className="lg:col-span-7">
                     <AssetList assets={assets} onRemoveAsset={handleRemoveAsset} />
                 </div>
             </div>

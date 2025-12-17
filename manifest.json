@@ -8,14 +8,14 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://img.icons8.com/ios-filled/192/2563eb/doughnut-chart.png",
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgZmlsbD0iI2ZmZmZmZiIvPjxwYXRoIGQ9Ik0yNTYsNzYgQTE4MCwxODAgMCAwLDEgNDExLjg4LDE2NS44OCBMMzMzLjk0LDIxMC45NCBBOTAsOTAgMCAwLDAgMjU2LDE2NiBaIiBmaWxsPSIjMjU2M2ViIi8+PHBhdGggZD0iTTQxMS44OCwxNjUuODggQTE4MCwxODAgMCAxLDEgNzYsMjU2IEwxNjYsMjU2IEE5MCw5MCAwIDEsMCAzMzMuOTQsMjEwLjk0IFoiIGZpbGw9IiMxMGI5ODEiLz48cGF0aCBkPSJNNzYsMjU2IEExODAsMTgwIDAgMCwxIDI1Niw3NiBMMjU2LDE2NiBBOTAsOTAgMCAwLDAgMTY2LDI1NiBaIiBmaWxsPSIjNjM2NmYxIi8+PC9zdmc+",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/svg+xml"
     },
     {
-      "src": "https://img.icons8.com/ios-filled/512/2563eb/doughnut-chart.png",
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgZmlsbD0iI2ZmZmZmZiIvPjxwYXRoIGQ9Ik0yNTYsNzYgQTE4MCwxODAgMCAwLDEgNDExLjg4LDE2NS44OCBMMzMzLjk0LDIxMC45NCBBOTAsOTAgMCAwLDAgMjU2LDE2NiBaIiBmaWxsPSIjMjU2M2ViIi8+PHBhdGggZD0iTTQxMS44OCwxNjUuODggQTE4MCwxODAgMCAxLDEgNzYsMjU2IEwxNjYsMjU2IEE5MCw5MCAwIDEsMCAzMzMuOTQsMjEwLjk0IFoiIGZpbGw9IiMxMGI5ODEiLz48cGF0aCBkPSJNNzYsMjU2IEExODAsMTgwIDAgMCwxIDI1Niw3NiBMMjU2LDE2NiBBOTAsOTAgMCAwLDAgMTY2LDI1NiBaIiBmaWxsPSIjNjM2NmYxIi8+PC9zdmc+",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/svg+xml"
     }
   ]
 }
