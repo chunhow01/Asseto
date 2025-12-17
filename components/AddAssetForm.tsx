@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Loader2, AlertCircle, RefreshCw, PenTool } from 'lucide-react';
-import { fetchPrice } from '../services/stockService';
+import { fetchCryptoPrice } from '../services/stockService';
 
 interface AddAssetFormProps {
   onAddAsset: (symbol: string, shares: number, price: number) => void;
@@ -9,7 +9,7 @@ interface AddAssetFormProps {
 type InputMode = 'api' | 'manual';
 
 const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
-  const [mode, setMode] = useState<InputMode>('api');
+  const [mode, setMode] = useState<InputMode>('manual');
   const [symbol, setSymbol] = useState('');
   const [shares, setShares] = useState('');
   const [manualPrice, setManualPrice] = useState('');
@@ -37,16 +37,22 @@ const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
         return;
     }
 
-    // API Mode
+    // Auto Mode (Optimized for Crypto)
     setIsLoading(true);
     setError(null);
 
     try {
-      const price = await fetchPrice(symbol);
-      onAddAsset(symbol.toUpperCase(), sharesNum, price);
-      resetForm();
+      const price = await fetchCryptoPrice(symbol);
+      if (price && price > 0) {
+        onAddAsset(symbol.toUpperCase(), sharesNum, price);
+        resetForm();
+      } else {
+        setError("Could not auto-fetch price. Please use Manual Input.");
+        setMode('manual');
+      }
     } catch (err) {
-      setError("Failed to fetch price. Try Manual Input.");
+      setError("Fetch failed. Please use Manual Input.");
+      setMode('manual');
     } finally {
       setIsLoading(false);
     }
@@ -67,21 +73,21 @@ const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
             Add New Asset
         </h3>
         
-        {/* Mode Toggle */}
+        {/* Mode Toggle - Restored Original Names */}
         <div className="flex bg-gray-100 p-1 rounded-lg">
             <button
                 type="button"
-                onClick={() => setMode('api')}
-                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1.5 ${mode === 'api' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                onClick={() => setMode('manual')}
+                className={`px-4 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1.5 ${mode === 'manual' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
             >
-                <RefreshCw size={12} /> Auto
+                <PenTool size={12} /> Manual
             </button>
             <button
                 type="button"
-                onClick={() => setMode('manual')}
-                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1.5 ${mode === 'manual' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                onClick={() => setMode('api')}
+                className={`px-4 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1.5 ${mode === 'api' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
             >
-                <PenTool size={12} /> Manual
+                <RefreshCw size={12} /> Auto
             </button>
         </div>
       </div>
@@ -95,7 +101,7 @@ const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
             type="text"
             value={symbol}
             onChange={(e) => setSymbol(e.target.value)}
-            placeholder="e.g. AAPL, BTC"
+            placeholder="e.g. AAPL, BTC, SOL"
             className="w-full bg-gray-50 text-gray-900 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-200 focus:bg-white placeholder-gray-400 transition-all text-sm"
           />
         </div>
@@ -115,7 +121,7 @@ const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
                 />
             </div>
             
-            {mode === 'manual' && (
+            {(mode === 'manual' || isLoading) && (
                 <div className="flex-1">
                     <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wide">
                         Price ($)
@@ -123,10 +129,11 @@ const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
                     <input
                         type="number"
                         step="any"
+                        disabled={isLoading}
                         value={manualPrice}
                         onChange={(e) => setManualPrice(e.target.value)}
                         placeholder="0.00"
-                        className="w-full bg-gray-50 text-gray-900 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-200 focus:bg-white placeholder-gray-400 transition-all text-sm"
+                        className="w-full bg-gray-50 text-gray-900 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-200 focus:bg-white placeholder-gray-400 transition-all text-sm disabled:opacity-50"
                     />
                 </div>
             )}
@@ -151,7 +158,7 @@ const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
           {isLoading ? (
             <>
               <Loader2 className="animate-spin" size={18} />
-              Fetching...
+              Fetching Price...
             </>
           ) : (
             <>

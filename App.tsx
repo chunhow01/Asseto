@@ -18,9 +18,9 @@ const App: React.FC = () => {
       console.error("Failed to load from local storage", e);
     }
     return [
-      { id: '1', symbol: 'VOO', shares: 15.5, price: 436.50 },
-      { id: '2', symbol: 'BTC', shares: 0.25, price: 64230.15 },
-      { id: '3', symbol: 'AAPL', shares: 50, price: 173.25 },
+      { id: '1', symbol: 'VOO', shares: 15.5, price: 536.50 },
+      { id: '2', symbol: 'BTC', shares: 0.25, price: 92230.15 },
+      { id: '3', symbol: 'AAPL', shares: 50, price: 228.25 },
     ];
   });
 
@@ -58,14 +58,15 @@ const App: React.FC = () => {
         <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
             <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    {/* Minimalist Logo synchronized with app icon */}
-                    <div className="h-10 px-4 bg-white rounded-xl flex items-center justify-center shadow-sm border border-gray-100 overflow-hidden">
+                    {/* Restored Original Blue Doughnut Logo */}
+                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm border border-gray-100 overflow-hidden p-1.5">
                         <img 
-                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgZmlsbD0id2hpdGUiLz48dGV4dCB4PSI1MCUiIHk9IjUyJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgJ1NlZ29lIFVJJywgUm9ib3RvLCBIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIiBmb250LXNpemU9Ijk2IiBsZXR0ZXItc3BhY2luZz0iLTUiIGZpbGw9ImJsYWNrIj5Bc3NldG88L3RleHQ+PC9zdmc+" 
+                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMTUwIiBzdHJva2U9IiMyNTYzZWIiIHN0cm9rZS13aWR0aD0iNTAiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMjU2IDEwNiBBMTUwIDE1MCAwIDAgMSA0MDYgMjU2IiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS13aWR0aD0iNTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==" 
                             alt="Asseto Logo" 
-                            className="h-7 object-contain"
+                            className="w-full h-full object-contain"
                         />
                     </div>
+                    <span className="font-bold text-xl tracking-tight text-gray-900">Asseto</span>
                 </div>
                 <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-gray-500">
                     <span className="hover:text-gray-900 cursor-pointer transition-colors font-semibold">Dashboard</span>
