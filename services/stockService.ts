@@ -1,17 +1,21 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
 /**
- * Fetches asset prices using Gemini with Google Search grounding for real-time accuracy.
- * This provides a more robust "live" feel for any asset symbol provided.
+ * Fetches asset prices using Gemini with Google Search grounding.
  */
 export const fetchPrice = async (symbol: string): Promise<number> => {
   const upperSymbol = symbol.toUpperCase().trim();
 
+  // Robust check for the API key in the browser environment
+  if (!process.env.API_KEY || process.env.API_KEY === 'undefined') {
+    console.error("Gemini API Key is missing in this browser environment. Check your environment variable settings.");
+  }
+
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: `What is the current trading price of ${upperSymbol}? Return only the numerical value in USD. For example, if it is 150.25, just return "150.25".`,
+      contents: `Search for the current real-time trading price of ${upperSymbol}. Return only a JSON object with a single field "price" containing the numerical value in USD.`,
       config: {
         tools: [{ googleSearch: {} }],
         responseMimeType: "application/json",
@@ -35,8 +39,8 @@ export const fetchPrice = async (symbol: string): Promise<number> => {
         return result.price;
       }
     }
-  } catch (e) {
-    console.warn("Real-time price fetch failed, falling back to mock data", e);
+  } catch (e: any) {
+    console.warn(`Real-time price fetch for ${upperSymbol} failed:`, e?.message || e);
   }
 
   // Extensive list of popular stocks to feel "real" as a fallback
