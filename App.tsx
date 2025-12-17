@@ -58,18 +58,17 @@ const App: React.FC = () => {
         <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
             <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    {/* Consistent Minimalist Logo matched to home screen */}
-                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm border border-gray-100 overflow-hidden p-1.5">
+                    {/* Consistent Minimalist Logo matched to home screen icon */}
+                    <div className="h-10 px-3 bg-white rounded-xl flex items-center justify-center shadow-sm border border-gray-100 overflow-hidden">
                         <img 
-                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgZmlsbD0iI2ZmZmZmZiIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMTUwIiBzdHJva2U9IiMyNTYzZWIiIHN0cm9rZS13aWR0aD0iNTAiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMjU2IDEwNiBBMTUwIDE1MCAwIDAgMSA0MDYgMjU2IiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS13aWR0aD0iNTAiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==" 
+                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgZmlsbD0id2hpdGUiLz48dGV4dCB4PSI1MCUiIHk9IjUzJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sIEludGVyLCBzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iODAwIiBmb250LXNpemU9Ijk2IiBsZXR0ZXItc3BhY2luZz0iLTQiIGZpbGw9ImJsYWNrIj5Bc3NldG88L3RleHQ+PC9zdmc+" 
                             alt="Asseto Logo" 
-                            className="w-full h-full object-contain"
+                            className="h-6 object-contain"
                         />
                     </div>
-                    <span className="font-bold text-xl tracking-tight text-gray-900">Asseto</span>
                 </div>
                 <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-gray-500">
-                    <span className="hover:text-gray-900 cursor-pointer transition-colors">Dashboard</span>
+                    <span className="hover:text-gray-900 cursor-pointer transition-colors font-semibold">Dashboard</span>
                     <button 
                         onClick={() => setIsSettingsOpen(true)}
                         className="flex items-center gap-2 hover:text-gray-900 cursor-pointer transition-colors"
