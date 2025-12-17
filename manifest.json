@@ -1,19 +1,19 @@
 {
   "name": "Asseto",
   "short_name": "Asseto",
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#f9fafb",
+  "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://img.icons8.com/ios-filled/192/2563eb/doughnut-chart.png",
+      "src": "https://ui-avatars.com/api/?name=Asseto&background=ffffff&color=2563eb&length=1&size=192&rounded=false&bold=true&format=png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://img.icons8.com/ios-filled/512/2563eb/doughnut-chart.png",
+      "src": "https://ui-avatars.com/api/?name=Asseto&background=ffffff&color=2563eb&length=1&size=512&rounded=false&bold=true&format=png",
       "sizes": "512x512",
       "type": "image/png"
     }
