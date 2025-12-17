@@ -28,9 +28,12 @@ export const fetchPrice = async (symbol: string): Promise<number> => {
       },
     });
 
-    const result = JSON.parse(response.text);
-    if (result && typeof result.price === 'number') {
-      return result.price;
+    const text = response.text;
+    if (text) {
+      const result = JSON.parse(text);
+      if (result && typeof result.price === 'number') {
+        return result.price;
+      }
     }
   } catch (e) {
     console.warn("Real-time price fetch failed, falling back to mock data", e);
