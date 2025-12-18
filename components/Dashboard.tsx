@@ -2,17 +2,23 @@ import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { Asset, CHART_COLORS } from '../types';
 import { Wallet } from 'lucide-react';
+import { Currency, HKD_RATE } from '../App';
 
 interface DashboardProps {
   assets: Asset[];
+  currency: Currency;
+  onCurrencyChange: (currency: Currency) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ assets }) => {
-  const totalValue = assets.reduce((sum, asset) => sum + (asset.shares * asset.price), 0);
+const Dashboard: React.FC<DashboardProps> = ({ assets, currency, onCurrencyChange }) => {
+  const baseValue = assets.reduce((sum, asset) => sum + (asset.shares * asset.price), 0);
+  const displayRate = currency === 'HKD' ? HKD_RATE : 1;
+  const totalValue = baseValue * displayRate;
+  const symbol = currency === 'HKD' ? 'HKD$' : 'USD$';
 
   const data = assets.map(asset => ({
     name: asset.symbol,
-    value: asset.shares * asset.price
+    value: asset.shares * asset.price * displayRate
   })).sort((a, b) => b.value - a.value);
 
   // Custom tooltip for the pie chart
@@ -24,7 +30,7 @@ const Dashboard: React.FC<DashboardProps> = ({ assets }) => {
         <div className="bg-white border border-gray-200 p-3 rounded-lg shadow-xl">
           <p className="font-bold text-gray-900">{data.name}</p>
           <p className="text-gray-600">
-            ${data.value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            {symbol}{data.value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
           <p className="text-sm text-gray-400">{percent}% of Portfolio</p>
         </div>
@@ -34,18 +40,48 @@ const Dashboard: React.FC<DashboardProps> = ({ assets }) => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center py-6 bg-white rounded-3xl mb-6 shadow-sm border border-gray-200 relative overflow-hidden">
+    <div className="w-full flex flex-col items-center justify-center py-8 bg-white rounded-3xl mb-6 shadow-sm border border-gray-200 relative overflow-hidden">
       
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-50/50 to-white pointer-events-none" />
 
-      <div className="z-10 flex flex-col items-center mb-6">
-        <h2 className="text-gray-500 text-sm font-medium uppercase tracking-wider flex items-center gap-2">
-          <Wallet size={16} /> Total Portfolio Value
+      {/* Ultra-mini Currency Switcher Toggle */}
+      <div className="absolute top-2 right-2 z-20">
+        <div className="flex bg-gray-100 p-0.5 rounded-md border border-gray-200 shadow-inner">
+          <button
+            onClick={() => onCurrencyChange('USD')}
+            className={`px-1.5 py-0.5 text-[7px] font-black rounded-sm transition-all ${
+              currency === 'USD' 
+                ? 'bg-white text-blue-600 shadow-xs' 
+                : 'text-gray-400 hover:text-gray-600'
+            }`}
+          >
+            USD
+          </button>
+          <button
+            onClick={() => onCurrencyChange('HKD')}
+            className={`px-1.5 py-0.5 text-[7px] font-black rounded-sm transition-all ${
+              currency === 'HKD' 
+                ? 'bg-white text-blue-600 shadow-xs' 
+                : 'text-gray-400 hover:text-gray-600'
+            }`}
+          >
+            HKD
+          </button>
+        </div>
+      </div>
+
+      <div className="z-10 flex flex-col items-center mb-6 px-4">
+        <h2 className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] flex items-center gap-2">
+          <Wallet size={14} className="text-blue-500" /> Total Portfolio Value
         </h2>
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 tracking-tight">
-          ${totalValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        <h1 className="text-3xl md:text-5xl font-black text-gray-900 mt-3 tracking-tighter flex items-baseline gap-1">
+          <span className="text-xl md:text-2xl font-bold text-gray-400 mb-0.5">{symbol}</span>
+          {totalValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </h1>
+        {currency === 'HKD' && (
+          <p className="text-[10px] text-gray-400 mt-2 font-medium">Rate: 1 USD = 7.8 HKD</p>
+        )}
       </div>
 
       <div className="w-full h-[250px] relative z-10">
@@ -54,11 +90,13 @@ const Dashboard: React.FC<DashboardProps> = ({ assets }) => {
             <PieChart>
               <Pie
                 data={data}
-                innerRadius={60}
-                outerRadius={80}
-                paddingAngle={5}
+                innerRadius={65}
+                outerRadius={85}
+                paddingAngle={4}
                 dataKey="value"
                 stroke="none"
+                animationBegin={0}
+                animationDuration={800}
               >
                 {data.map((entry, index) => (
                   <Cell 
@@ -71,22 +109,22 @@ const Dashboard: React.FC<DashboardProps> = ({ assets }) => {
             </PieChart>
           </ResponsiveContainer>
         ) : (
-          <div className="flex items-center justify-center h-full text-gray-400 italic">
+          <div className="flex items-center justify-center h-full text-gray-300 italic text-sm">
             No assets to display
           </div>
         )}
       </div>
       
       {/* Legend below chart */}
-      <div className="flex flex-wrap justify-center gap-3 px-4 mt-2 max-w-lg z-10">
+      <div className="flex flex-wrap justify-center gap-4 px-6 mt-4 max-w-lg z-10">
         {data.slice(0, 6).map((entry, index) => (
-            <div key={entry.name} className="flex items-center gap-1.5 text-xs">
+            <div key={entry.name} className="flex items-center gap-2 text-[11px]">
                 <div 
                     className="w-2.5 h-2.5 rounded-full shadow-sm" 
                     style={{ backgroundColor: CHART_COLORS[index % CHART_COLORS.length] }}
                 />
-                <span className="text-gray-700 font-medium">{entry.name}</span>
-                <span className="text-gray-400">
+                <span className="text-gray-600 font-semibold">{entry.name}</span>
+                <span className="text-gray-400 font-medium">
                     {totalValue > 0 ? ((entry.value / totalValue) * 100).toFixed(0) : 0}%
                 </span>
             </div>
