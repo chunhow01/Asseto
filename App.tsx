@@ -10,20 +10,26 @@ const App: React.FC = () => {
   const STORAGE_KEY = 'asseto_portfolio_v1';
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
+  // Initialize state from Local Storage, or fall back to default data
   const [assets, setAssets] = useState<Asset[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        return JSON.parse(saved);
+      }
     } catch (e) {
       console.error("Failed to load from local storage", e);
     }
+    
+    // Default data for first-time users
     return [
-      { id: '1', symbol: 'VOO', shares: 15.5, price: 536.50 },
-      { id: '2', symbol: 'BTC', shares: 0.25, price: 92230.15 },
-      { id: '3', symbol: 'AAPL', shares: 50, price: 228.25 },
+      { id: '1', symbol: 'VOO', shares: 15.5, price: 436.50 },
+      { id: '2', symbol: 'BTC', shares: 0.25, price: 64230.15 },
+      { id: '3', symbol: 'AAPL', shares: 50, price: 173.25 },
     ];
   });
 
+  // Save to Local Storage whenever 'assets' changes
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(assets));
   }, [assets]);
@@ -55,31 +61,31 @@ const App: React.FC = () => {
             onImport={handleImportAssets}
         />
 
+        {/* Navigation / Header */}
         <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
             <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    {/* Minimalist Bitcoin Logo (Blue/White) */}
-                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm border border-gray-100 overflow-hidden">
+                    {/* Updated Logo: Doughnut chart on white background */}
+                    <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm border border-blue-100">
                         <img 
-                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgcng9IjEyOCIgZmlsbD0iIzI1NjNFQiIvPjxwYXRoIGQ9Ik0zMzYgMjE2YzAtNDAtMzItNjQtODAtNjRoLTY0di0zMmgtMjR2MzJoLTE2djMyaDE2djE0NGgtMTZ2MzhoMTZ2MzJoMjR2LTMyaDY0YzQ4IDAgODAtMjQgODAtNjQgMC0yOC0xNi00OC00MC01NiAyNC04IDQwLTI4IDQwLTU2em0tMTIwLTQwaDU2YzI4IDAgNDggMTYgNDggNDBzLTIwIDQwLTQ4IDQwaC01NnYtODB6bTAgMTM2di04OGg2NGMyOCAwIDQ4IDE2IDQ4IDQ0cy0yMCA0NC00OCA0NGgtNjR6IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjIzMCIgeT0iODAiIHdpZHRoPSIxNiIgaGVpnaHQ9IjQwIiByeD0iNCIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSIyNjYiIHk9IjgwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjIzMCIgeT0iMzkyIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjI2NiIgeT0iMzkyIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==" 
+                            src="https://img.icons8.com/ios-filled/50/2563eb/doughnut-chart.png" 
                             alt="Asseto Logo" 
-                            className="w-full h-full object-contain"
+                            className="w-5 h-5"
                         />
                     </div>
                     <span className="font-bold text-xl tracking-tight text-gray-900">Asseto</span>
                 </div>
                 <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-gray-500">
-                    <span className="hover:text-gray-900 cursor-pointer transition-colors font-semibold text-blue-600">Dashboard</span>
+                    <span className="hover:text-gray-900 cursor-pointer transition-colors">Dashboard</span>
                     <button 
                         onClick={() => setIsSettingsOpen(true)}
                         className="flex items-center gap-2 hover:text-gray-900 cursor-pointer transition-colors"
                     >
                         Settings
                     </button>
-                    <div className="w-8 h-8 rounded-full bg-gray-100 border border-gray-200 ml-2 overflow-hidden flex items-center justify-center text-[10px] text-gray-400">
-                      User
-                    </div>
+                    <div className="w-8 h-8 rounded-full bg-gray-100 border border-gray-200 ml-2"></div>
                 </div>
+                {/* Mobile Settings Icon */}
                 <button 
                     onClick={() => setIsSettingsOpen(true)}
                     className="sm:hidden p-2 text-gray-500 hover:bg-gray-100 rounded-lg"
@@ -90,12 +96,19 @@ const App: React.FC = () => {
         </nav>
 
         <main className="max-w-6xl mx-auto px-4 py-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Removed fixed height calculation for mobile to allow natural scrolling */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[calc(100vh-140px)]">
+                
+                {/* Left Column: Chart & Form */}
                 <div className="lg:col-span-5 flex flex-col gap-6">
                     <Dashboard assets={assets} />
-                    <AddAssetForm onAddAsset={handleAddAsset} />
+                    <div className="flex-1">
+                        <AddAssetForm onAddAsset={handleAddAsset} />
+                    </div>
                 </div>
-                <div className="lg:col-span-7">
+
+                {/* Right Column: Asset Table */}
+                <div className="lg:col-span-7 h-[500px] lg:h-auto">
                     <AssetList assets={assets} onRemoveAsset={handleRemoveAsset} />
                 </div>
             </div>
