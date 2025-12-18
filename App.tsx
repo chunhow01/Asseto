@@ -58,10 +58,10 @@ const App: React.FC = () => {
         <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
             <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    {/* New Minimalist Ascend Bars Logo */}
-                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm border border-gray-100 overflow-hidden p-1.5">
+                    {/* Minimalist Bitcoin Logo (Blue/White) */}
+                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm border border-gray-100 overflow-hidden">
                         <img 
-                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgcng9IjEyOCIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSIxMjAiIHk9IjMwMCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjEwMCIgcng9IjM1IiBmaWxsPSIjRDBFMkZGIi8+PHJlY3QgeD0iMjIxIiB5PSIyMDAiIHdpZHRoPSI3MCIgaGVpnaHQ9IjIwMCIgcng9IjM1IiBmaWxsPSIjM0I4MkY2Ii8+PHJlY3QgeD0iMzIyIiB5PSIxMDAiIHdpZHRoPSI3MCIgaGVpnaHQ9IjMwMCIgcng9IjM1IiBmaWxsPSIjMjU2M0VCIi8+PC9zdmc+" 
+                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgcng9IjEyOCIgZmlsbD0iIzI1NjNFQiIvPjxwYXRoIGQ9Ik0zMzYgMjE2YzAtNDAtMzItNjQtODAtNjRoLTY0di0zMmgtMjR2MzJoLTE2djMyaDE2djE0NGgtMTZ2MzhoMTZ2MzJoMjR2LTMyaDY0YzQ4IDAgODAtMjQgODAtNjQgMC0yOC0xNi00OC00MC01NiAyNC04IDQwLTI4IDQwLTU2em0tMTIwLTQwaDU2YzI4IDAgNDggMTYgNDggNDBzLTIwIDQwLTQ4IDQwaC01NnYtODB6bTAgMTM2di04OGg2NGMyOCAwIDQ4IDE2IDQ4IDQ0cy0yMCA0NC00OCA0NGgtNjR6IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjIzMCIgeT0iODAiIHdpZHRoPSIxNiIgaGVpnaHQ9IjQwIiByeD0iNCIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSIyNjYiIHk9IjgwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjIzMCIgeT0iMzkyIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjI2NiIgeT0iMzkyIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==" 
                             alt="Asseto Logo" 
                             className="w-full h-full object-contain"
                         />
