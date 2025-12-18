@@ -37,7 +37,7 @@ const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
         return;
     }
 
-    // Auto Mode (Optimized for Crypto)
+    // Auto Mode (CoinGecko)
     setIsLoading(true);
     setError(null);
 
@@ -47,11 +47,11 @@ const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
         onAddAsset(symbol.toUpperCase(), sharesNum, price);
         resetForm();
       } else {
-        setError("Could not auto-fetch price. Please use Manual Input.");
+        setError("Could not fetch price for this symbol. Try Manual mode.");
         setMode('manual');
       }
     } catch (err) {
-      setError("Fetch failed. Please use Manual Input.");
+      setError("Fetch failed. Please check connection or use Manual.");
       setMode('manual');
     } finally {
       setIsLoading(false);
@@ -73,7 +73,7 @@ const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
             Add New Asset
         </h3>
         
-        {/* Mode Toggle - Restored Original Names */}
+        {/* Mode Toggle - "Auto" and "Manual" only */}
         <div className="flex bg-gray-100 p-1 rounded-lg">
             <button
                 type="button"
