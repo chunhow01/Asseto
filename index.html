@@ -12,45 +12,79 @@
     <!-- PWA Manifest & Icons -->
     <link rel="manifest" href="/manifest.json">
     
-    <!-- Minimalist Bitcoin Icon (Blue/White Design) -->
-    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgcng9IjEyOCIgZmlsbD0iIzI1NjNFQiIvPjxwYXRoIGQ9Ik0zMzYgMjE2YzAtNDAtMzItNjQtODAtNjRoLTY0di0zMmgtMjR2MzJoLTE2djMyaDE2djE0NGgtMTZ2MzhoMTZ2MzJoMjR2LTMyaDY0YzQ4IDAgODAtMjQgODAtNjQgMC0yOC0xNi00OC00MC01NiAyNC04IDQwLTI4IDQwLTU2em0tMTIwLTQwaDU2YzI4IDAgNDggMTYgNDggNDBzLTIwIDQwLTQ4IDQwaC01NnYtODB6bTAgMTM2di04OGg2NGMyOCAwIDQ4IDE2IDQ4IDQ0cy0yMCA0NC00OCA0NGgtNjR6IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjIzMCIgeT0iODAiIHdpZHRoPSIxNiIgaGVpnaHQ9IjQwIiByeD0iNCIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSIyNjYiIHk9IjgwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjIzMCIgeT0iMzkyIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjI2NiIgeT0iMzkyIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpnaHQ9IjUxMiIgcng9IjEyOCIgZmlsbD0iIzI1NjNFQiIvPjxwYXRoIGQ9Ik0zMzYgMjE2YzAtNDAtMzItNjQtODAtNjRoLTY0di0zMmgtMjR2MzJoLTE2djMyaDE2djE0NGgtMTZ2MzhoMTZ2MzJoMjR2LTMyaDY0YzQ4IDAgODAtMjQgODAtNjQgMC0yOC0xNi00OC00MC01NiAyNC04IDQwLTI4IDQwLTU2em0tMTIwLTQwaDU2YzI4IDAgNDggMTYgNDggNDBzLTIwIDQwLTQ4IDQwaC01NnYtODB6bTAgMTM2di04OGg2NGMyOCAwIDQ4IDE2IDQ4IDQ0cy0yMCA0NC00OCA0NGgtNjR6IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjIzMCIgeT0iODAiIHdpZHRoPSIxNiIgaGVpnaHQ9IjQwIiByeD0iNCIgZmlsbD0id2hpdGUiLz48cmVjdCB4PSIyNjYiIHk9IjgwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjIzMCIgeT0iMzkyIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjI2NiIgeT0iMzkyIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==">
+    <!-- Reverted to the doughnut chart icon -->
+    <link rel="apple-touch-icon" href="https://img.icons8.com/ios-filled/192/2563eb/doughnut-chart.png">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/2563eb/doughnut-chart.png">
     
     <title>Asseto</title>
+    <!-- We keep Tailwind CDN for simplicity in this setup -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
-            fontFamily: { sans: ['Inter', 'sans-serif'] },
-            colors: { primary: { 500: '#3b82f6', 600: '#2563eb' } }
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              primary: {
+                500: '#3b82f6',
+                600: '#2563eb',
+              }
+            }
           }
         }
       }
     </script>
     <style>
-      body { background-color: #f9fafb; color: #111827; -webkit-font-smoothing: antialiased; overscroll-behavior-y: none; }
-      .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
-      .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-      .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 20px; }
+      body {
+        background-color: #f9fafb;
+        color: #111827;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overscroll-behavior-y: none;
+      }
+      .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+        transition: scrollbar-color 0.3s;
+      }
+      .custom-scrollbar:hover {
+        scrollbar-color: #d1d5db transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 20px;
+      }
+      .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+        background-color: #d1d5db;
+      }
     </style>
   <script type="importmap">
 {
   "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
-    "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
     "recharts": "https://esm.sh/recharts@^3.6.0",
-    "vite": "https://esm.sh/vite@^7.3.0"
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
 </head>
   <body>
-    <div id="root"></div>
+    <div id="root" class="min-h-screen w-full bg-gray-50 text-gray-900"></div>
+    <!-- Entry point for Vite -->
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
