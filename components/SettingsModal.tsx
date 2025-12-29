@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Asset } from '../types';
-import { X, Download, Upload, AlertTriangle } from 'lucide-react';
+import { X, Download, Upload, AlertTriangle, Key } from 'lucide-react';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -11,6 +11,17 @@ interface SettingsModalProps {
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, assets, onImport }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [apiKey, setApiKey] = useState('');
+
+  useEffect(() => {
+    const savedKey = localStorage.getItem('asseto_finnhub_key');
+    if (savedKey) setApiKey(savedKey);
+  }, [isOpen]);
+
+  const handleSaveKey = () => {
+    localStorage.setItem('asseto_finnhub_key', apiKey.trim());
+    alert("API Key saved successfully!");
+  };
 
   if (!isOpen) return null;
 
@@ -40,7 +51,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, assets, 
         const json = event.target?.result as string;
         const parsed = JSON.parse(json);
         if (Array.isArray(parsed)) {
-            // Basic validation
             onImport(parsed);
             onClose();
             alert("Data imported successfully!");
@@ -52,13 +62,12 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, assets, 
       }
     };
     reader.readAsText(file);
-    // Reset input so same file can be selected again
     e.target.value = '';
   };
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col">
         <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
           <h3 className="font-bold text-lg text-gray-900">Data Management</h3>
           <button onClick={onClose} className="p-1 rounded-full hover:bg-gray-200 transition-colors">
@@ -66,34 +75,57 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, assets, 
           </button>
         </div>
         
-        <div className="p-6 space-y-6">
+        <div className="p-6 space-y-6 overflow-y-auto">
+          {/* API Key Section */}
+          <div className="space-y-3">
+            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
+              <Key size={14} className="text-blue-500" /> US Stocks API (Finnhub)
+            </h4>
+            <div className="flex gap-2">
+              <input 
+                type="password"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                placeholder="Enter Finnhub API Key"
+                className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              />
+              <button 
+                onClick={handleSaveKey}
+                className="bg-gray-900 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-gray-800 transition-colors"
+              >
+                Save
+              </button>
+            </div>
+            <p className="text-[10px] text-gray-400">Get a free key at <a href="https://finnhub.io" target="_blank" className="text-blue-500 underline">finnhub.io</a></p>
+          </div>
+
           <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex gap-3">
              <AlertTriangle className="text-blue-600 shrink-0" size={20} />
              <div className="text-sm text-blue-900">
-                <p className="font-semibold mb-1">Local Storage Only</p>
-                <p>Your data lives on this specific device and URL. Export your data to back it up or transfer it to another version.</p>
+                <p className="font-semibold mb-1 text-xs">Local Storage Security</p>
+                <p className="text-[11px] leading-relaxed">Your data and API keys are stored locally in your browser. Clearing browser cache will delete your portfolio.</p>
              </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <button 
                 onClick={handleExport}
-                className="flex flex-col items-center justify-center gap-3 p-6 rounded-xl border-2 border-dashed border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-all group"
+                className="flex flex-col items-center justify-center gap-3 p-4 rounded-xl border-2 border-dashed border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-all group"
             >
-                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Download size={24} />
+                <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Download size={20} />
                 </div>
-                <span className="font-semibold text-gray-700">Export JSON</span>
+                <span className="text-xs font-semibold text-gray-700">Export Portfolio</span>
             </button>
 
             <button 
                 onClick={handleImportClick}
-                className="flex flex-col items-center justify-center gap-3 p-6 rounded-xl border-2 border-dashed border-gray-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all group"
+                className="flex flex-col items-center justify-center gap-3 p-4 rounded-xl border-2 border-dashed border-gray-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all group"
             >
-                <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Upload size={24} />
+                <div className="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Upload size={20} />
                 </div>
-                <span className="font-semibold text-gray-700">Import JSON</span>
+                <span className="text-xs font-semibold text-gray-700">Import Portfolio</span>
             </button>
             <input 
                 type="file" 

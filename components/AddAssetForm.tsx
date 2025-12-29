@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Loader2, AlertCircle, RefreshCw, PenTool } from 'lucide-react';
-import { fetchCryptoPrice } from '../services/stockService';
+import { fetchPrice } from '../services/stockService';
 
 interface AddAssetFormProps {
   onAddAsset: (symbol: string, shares: number, price: number) => void;
@@ -37,22 +37,20 @@ const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
         return;
     }
 
-    // Auto Mode (CoinGecko)
+    // Auto Mode (Hybrid CoinGecko/Finnhub)
     setIsLoading(true);
     setError(null);
 
     try {
-      const price = await fetchCryptoPrice(symbol);
+      const price = await fetchPrice(symbol);
       if (price && price > 0) {
         onAddAsset(symbol.toUpperCase(), sharesNum, price);
         resetForm();
       } else {
-        setError("Could not fetch price for this symbol. Try Manual mode.");
-        setMode('manual');
+        setError("Symbol not found. Check your API key in Settings or try Manual mode.");
       }
     } catch (err) {
       setError("Fetch failed. Please check connection or use Manual.");
-      setMode('manual');
     } finally {
       setIsLoading(false);
     }
@@ -73,7 +71,6 @@ const AddAssetForm: React.FC<AddAssetFormProps> = ({ onAddAsset }) => {
             Add New Asset
         </h3>
         
-        {/* Mode Toggle - "Auto" and "Manual" only */}
         <div className="flex bg-gray-100 p-1 rounded-lg">
             <button
                 type="button"
